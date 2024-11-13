@@ -3,7 +3,9 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path("",Base.as_view(),name="base"),
+    path("Home",Base.as_view(),name="base"),
+    path("",login,name="logn"),
+    path('logout/',user_logout, name='logout'),
     
     #  Order
     path('order/', OrderListView.as_view(), name='o_list'),

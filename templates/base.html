@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
 <body>
-
+    {% block content %}
+    {% if user.is_authenticated %}
         <div class="a1">
-            <h1 class="a2">Vakansi Online</h1>
+            <h1 class="a2">Product Online</h1>
             <a href="{% url 'c_list' %}"><h3 class="a3">Castumer</h3></a>
-            <a href="{% url 'p_list' %}"><h3 class="a3">Prodact</h3></a>
+            <a href="{% url 'p_list' %}"><h3 class="a3">Product</h3></a>
             <a href="{% url 'o_list' %}"><h3 class="a3">Order</h3></a>
+            <a href="{% url 'logout' %}"><h3 class="a3">Logout</h3></a> 
+
+            
         </div>
 
-{% block content %}
 <div class="a5">
     <div class="a8">
         <h1 class="qw">Pruduct Online</h1>
@@ -24,10 +27,14 @@
     </div>
 </div>
 
-{% endblock content %}
+<div class="aa1">
+    <h1 class="aa2">Very good</h1>
+</div>
+{% else %}
+<h1>Shumo login nakarded</h1>
+<p>You can <a href="{% url 'login' %}" class="btn btn-primary btn-lg">log in again\</a>.</p>
 
-    <div class="aa1">
-        <h1 class="aa2">Very good</h1>
-    </div>
+    {% endif %}
+{% endblock content %}
 </body>
 </html>

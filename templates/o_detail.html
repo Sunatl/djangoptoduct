@@ -14,8 +14,10 @@
             <div class="a111">
             <h1>Welcome your Detail</h1>
             <a style="width: 50 px; height: 30px;margin-top: 50px" href="{% url 'o_list' %}">Menu</a>
-            <a style="width: 50 px; height: 30px;margin-top: 50px"  href="{% url 'o_delete' object.id %}">Delete</a>
-            <a style="width: 50 px; height: 30px;margin-top: 50px" href="{% url 'o_up' object.id %}">Update</a>
+            {% if user.id == object.user.id %}
+                <a style="width: 50 px; height: 30px;margin-top: 50px"  href="{% url 'o_delete' object.id %}">Delete</a>
+                <a style="width: 50 px; height: 30px;margin-top: 50px" href="{% url 'o_up' object.id %}">Update</a>
+            {% endif %}
     </div>
     </header>
     {% block content %}
@@ -23,6 +25,7 @@
             <div class="card">
                 <h3>Customer: {{object.customer}}</h3>
                 <h3>Product: {{object.product}}</h3>
+                <h3>User: {{object.user}}</h3>
                 <h3>Order date: {{object.order_date}}</h3>
                 <h3>Quantity: {{object.quantity}}</h3>
                 <h3>Status: {{object.status}}</h3>

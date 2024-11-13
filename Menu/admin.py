@@ -20,3 +20,4 @@ class Or(admin.ModelAdmin):
     search_fields =("customer__name","product__name","quantity")
     list_filter = ("customer","product","quantity")
     
+    
