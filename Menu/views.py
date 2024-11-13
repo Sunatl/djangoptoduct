@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView,TemplateView
 from .models import Order, Customer, Product
 from .forms import OrderForm, CustomerForm, ProductForm
-
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth import logout
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
@@ -26,6 +26,7 @@ class Base(TemplateView):
 class OrderListView(ListView):
     model = Order
     template_name = 'o_list.html'
+
 
 
 
@@ -52,10 +53,12 @@ class OrderDeleteView(DeleteView):
     def get_queryset(self):
         return Order.objects.filter(user = self.request.user)
 
-class OrderDetailView(DetailView):
+class OrderDetailView(PermissionRequiredMixin,DetailView):
     model = Order
     template_name = 'o_detail.html'
     context_object_name = "object"
+    permission_required = "o_list"
+    permission_denied_message = "Shumo nametavoned dida!"
 
 # Customer
 class CustomerListView(ListView):

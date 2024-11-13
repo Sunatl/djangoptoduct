@@ -18,6 +18,7 @@ class Product(models.Model):
     description = models.TextField()
     stock = models.IntegerField()
 
+
     def __str__(self):
         return self.name
 
@@ -31,7 +32,11 @@ class Order(models.Model):
     status = models.CharField(max_length=50)
     
     
-    
+    class Meta:
+        default_permissions = ('add', 'change', 'delete') 
+        permissions = (
+            ('view_order', 'Can view order'),
+        )
     
 
 
